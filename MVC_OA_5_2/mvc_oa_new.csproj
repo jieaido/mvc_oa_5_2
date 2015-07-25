@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\Base.cs" />
+    <Compile Include="Controllers\DeparmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserinfoController.cs" />
     <Compile Include="Controllers\UserInfoesController.cs" />
@@ -247,6 +248,7 @@
     <Folder Include="Content\LgUI\" />
     <Folder Include="Content\themes\" />
     <Folder Include="Scripts\LGUI\" />
+    <Folder Include="Views\Deparment\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
