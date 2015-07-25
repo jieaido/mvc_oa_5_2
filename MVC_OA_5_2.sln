@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCOA_5.Model", "Model\MVCOA_5.Model.csproj", "{3285EC73-808C-4FD2-90FC-F503439FC2D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{3285EC73-808C-4FD2-90FC-F503439FC2D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{491E8EDB-42A3-4DB9-9B27-231E44B44118}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvc_oa_new", "MVC_OA_5_2\mvc_oa_new.csproj", "{C5126AD8-68D5-4F85-8224-8BD55A14A023}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "MVC_OA_5_2\UI.csproj", "{C5126AD8-68D5-4F85-8224-8BD55A14A023}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

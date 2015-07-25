@@ -260,9 +260,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\MVCOA_5.Model.csproj">
+    <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3285ec73-808c-4fd2-90fc-f503439fc2d7}</Project>
-      <Name>MVCOA_5.Model</Name>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{491e8edb-42a3-4db9-9b27-231e44b44118}</Project>
