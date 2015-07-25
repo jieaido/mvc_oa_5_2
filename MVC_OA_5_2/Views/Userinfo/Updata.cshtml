@@ -1,0 +1,94 @@
+﻿@model MVCOA_5.Model.UserInfo
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+    <link href="~/Content/Easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/Easyui/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.8.0.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+        function afterUpdata(data) {
+            if (data=="ok") {
+                window.parent.window.afterEditSuccess();
+                } else {
+                alert(data);
+            }
+        }
+
+        function Tosubmit() {
+            $("form").submit();
+        }
+    </script>
+
+    @using (Ajax.BeginForm("Updata", "Userinfo", new AjaxOptions()
+    {
+        HttpMethod = "Post",
+        OnSuccess = "afterUpdata"
+    }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>UserInfo</legend>
+
+            @Html.HiddenFor(model => model.ID)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserName)
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Pwd)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Pwd)
+                @Html.ValidationMessageFor(model => model.Pwd)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Mail)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Mail)
+                @Html.ValidationMessageFor(model => model.Mail)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Phone)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Phone)
+                @Html.ValidationMessageFor(model => model.Phone)
+            </div>
+            
+
+
+
+
+            <p>
+                <input type="submit" value="修改" />
+            </p>
+        </fieldset>
+    }
+
+
+</body>
+
+</html>
+
+<title>Updata</title>

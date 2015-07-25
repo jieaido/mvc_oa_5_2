@@ -1,0 +1,21 @@
+﻿@model System.Linq.IQueryable<MVCOA_5.Model.UserInfo>
+
+@{
+    ViewBag.Title = "title";
+    
+}
+
+<h2>title</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(u=>item.UserName)</td>
+            <td>@Html.DisplayFor(u=>item.Pwd) </td>
+        </tr>
+    }
+    
+</table>
