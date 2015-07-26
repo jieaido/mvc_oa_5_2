@@ -1,0 +1,236 @@
+﻿﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/Content/Easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/Easyui/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.8.0.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+            $(function() {
+
+                initTable();
+                $("#addDiv").css("display", "none");
+                $("#editdiv").css("display", "none");
+
+               
+            });
+
+            function initTable() {
+                $('#tt').datagrid({
+                    url: "/department/inittable", //rows=10  page=1
+                    title: '用户列表',
+                    width: 800,
+                    height: 400,
+                    fitColumns: true,
+                    idField: 'ID',
+                    loadMsg: '正在加载用户的信息...',
+                    pagination: true,
+                    singleSelect: false,
+                    pageSize: 10,
+                    pageNumber: 1,
+                    pageList: [5,10, 20, 30],
+                    queryParams: {}, //表格初始化往后台发送异步请求后台的json数据时候额外发送的请求参数。
+                    columns: [
+                        
+//u.ID, u.UserName, u.DelFlag, u.Mail, u.Phone, u.SubTime, u.SubBy
+                          [ { field: 'ck', checkbox: true, align: 'left', width: 50 },
+                    { field: 'ID', title: '部门编号'  },
+                    { field: 'DepName', title: '部门名'  },
+                    { field: 'DepNo', title: '部门编号'  },
+                    { field: 'DepMasterId', title: '部门负责人' },
+                    { field: 'SubBy', title: '提交人' },
+                    { field: 'ToShortDateString', title: '提交时间', align: 'right' }
+                    ] 
+                        
+                    ],
+                    toolbar: [
+                        {
+                            id: 'btnAdd',
+                            text: '添加',
+                            iconCls: 'icon-add',
+                            handler: function() {
+                                //alert("ok add");
+                                //弹出一个div
+                                adddialog();
+                            }
+                        }, {
+                            id: 'btnDelete',
+                            text: '删除',
+                            iconCls: 'icon-remove',
+                            handler: function() {
+                                doDelete();
+                            }
+                        }, {
+                            id: 'btnEdit',
+                            text: '修改',
+                            iconCls: 'icon-edit',
+                            handler: function() {
+                                edit();
+                            }
+                        }
+                    ],
+                    onHeaderContextMenu: function(e, field) {
+
+                    }
+                });
+            };
+            ///添加画面
+            function adddialog() {
+                $("#addDiv").css("display", "block");
+                $("#addDiv").dialog({
+                    title: "添加用户信息",
+                    width: 400,
+                    height: 400,
+                    model: true,
+                    buttons: [
+                        {
+                            text: "OK",
+                            iconCls: 'icon-ok',
+                            handler: function () {
+                                $("#addDiv form").submit();
+                            }
+                        }, {
+                            text: "Cannel",
+                            iconCls: 'icon-cancel',
+                            handler: function () {
+                                $('#addDiv').dialog('close');
+                            }
+                            }
+                    ]
+
+                });
+            };
+        ///删除
+            function doDelete() {
+                var rows = $('#tt').datagrid('getSelections');
+                if (rows.length<=0) {
+                    alert("请选择用户!");
+                    return;
+                } else {
+                    $.messager.confirm("提示消息", "确定删除吗", function() {
+                        var c = new Array();
+                        for (var i = 0; i < rows.length; i++) {
+                            c.push(rows[i].ID);
+                        }
+                        //
+                        $.post("@Url.Action("Delete","Department")", { ids: c.toString() }, function(parameters) {
+                            if (parameters == "OK") {
+                                $("#tt").datagrid("clearSelections");
+                                initTable();
+                            } else {
+                                alert("删除失败了");
+                            }
+                        });
+
+                    });
+
+                }
+            }
+
+            function afterAdd(data) {
+                if (data == "OK") {
+                    $("#addDiv").dialog("close");
+                    initTable();
+                } else {
+                    $.messager.alert(data);
+                }
+            };
+
+            function edit() {
+                var id = $("#tt").datagrid('getSelections');
+                if (id.length !== 1) {
+                    $.messager.alert('错误消息', '请选择一个用户');
+                    return;
+                } else {
+                    var url = "/department/Updata/";
+                    url += id[0].ID.toString();
+                    $("#updatadiv").attr("src", url);
+                    $("#editdiv").css("display", "block");
+                    $("#editdiv").dialog({
+                       // href:url,
+                        title: "添加用户信息",
+                        width: 400,
+                        height: 400,
+                        top:400,
+                        collapsible: true,
+                        minimizable: true,
+                        draggable: true,
+                        modal: true,
+                        inline:true,
+
+                        resizable: true,
+                        modal:true,
+                        buttons:[
+                        {
+                            text: "修改",
+                            iconCls: "icon-ok",
+                            handler: function() {
+                                var form1 = $("#updatadiv")[0];
+                                form1.contentWindow.Tosubmit();
+                            }
+                        },
+                        {
+                            text: "取消",
+                            iconCls: "icon-cancel",
+                            handler: function () {
+                                $("#editdiv").dialog('close');
+                            }
+                        }]
+                    });
+                    $("#editdiv").dialog('center');
+
+                }
+
+            };
+
+            function afterEditSuccess() {
+                $("#editdiv").dialog('close');
+                initTable();
+            }
+    </script>
+    <title>ShowUser</title>
+
+</head>
+<body>
+   
+    <div>
+        <table id="tt" style="width: 700px;" title="标题，可以使用代码进行初始化，也可以使用这种属性的方式" iconcls="icon-edit"></table>
+    </div>
+    <div id="addDiv">
+        @using (Ajax.BeginForm("create", "Department", new AjaxOptions
+        {
+            HttpMethod = "post",
+            OnSuccess = "afterAdd"
+        }))
+        {
+            <table>
+                <tr>
+                    <td>用户名</td>
+                    <td><input type="text" name="DepName" value=" " /></td>
+                </tr>
+                <tr>
+                    <td>密码</td>
+                    <td><input type="number" name="DepMasterId" value=" " /></td>
+                </tr>
+                <tr>
+                    <td>邮箱</td>
+                    <td><input type="number" name="DepNo" value=" " /></td>
+                </tr>
+                
+
+            </table>
+        }
+    </div>
+    <div id="editdiv">
+        <iframe id="updatadiv" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+
+</body>
+</html>

@@ -10,6 +10,11 @@ namespace DAL
     {
         protected OAModels Oadb = new OAModels();
 
+        public OAModels GetOaModels()
+        {
+            return Oadb;
+        }
+
         public virtual T Add(T entity)
         {
             Oadb.Set<T>().Add(entity);
@@ -42,7 +47,9 @@ namespace DAL
 
         public virtual  bool Update(T entity)
         {
-            return false;
+            Oadb.Entry(entity).State=EntityState.Modified;
+            return Oadb.SaveChanges() > 0;
+           
         }
 
         public virtual  IQueryable<T> Select(Func<T, bool> whereLambda)

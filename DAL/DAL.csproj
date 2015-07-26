@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEFDal.cs" />
+    <Compile Include="DepartmentDal.cs" />
     <Compile Include="IBaseDal.cs" />
     <Compile Include="userinfoDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

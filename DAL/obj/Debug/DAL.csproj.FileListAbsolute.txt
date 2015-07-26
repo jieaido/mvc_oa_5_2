@@ -26,3 +26,17 @@ D:\Users\jieai\Source\MVC_OA_5_2\DAL\bin\Debug\zh-Hans\EntityFramework.SqlServer
 D:\Users\jieai\Source\MVC_OA_5_2\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 D:\Users\jieai\Source\MVC_OA_5_2\DAL\obj\Debug\DAL.dll
 D:\Users\jieai\Source\MVC_OA_5_2\DAL\obj\Debug\DAL.pdb
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\DAL.dll.config
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\DAL.dll
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\DAL.pdb
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\EntityFramework.dll
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\EntityFramework.SqlServer.dll
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\MVCOA_5.Model.dll
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\MVCOA_5.Model.pdb
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\EntityFramework.xml
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\EntityFramework.SqlServer.xml
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\zh-Hans\EntityFramework.resources.dll
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\obj\Debug\DAL.dll
+f:\Users\jieai\Source\Repos\mvc_oa_5_2\DAL\obj\Debug\DAL.pdb

@@ -1,21 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using DAL;
 using MVCOA_5.Model;
 
 namespace mvc_oa_new.Controllers
 {
-    public class UserinfoController : Controller
+    public class DepartmentController : Controller
     {
-        //
-        // GET: /Userinfo/
-        private readonly UserinfoDal _userinfoDal = new UserinfoDal();
+       private  DepartmentDal departmentDal = new DepartmentDal();
 
         public ActionResult Index()
         {
-            var userinfos = _userinfoDal.Select(u => u.ID > 0);
-            return View(userinfos);
+            //var userinfos = departmentDal.Select(u => u.ID > 0);
+            return View();
         }
 
         //
@@ -38,22 +38,21 @@ namespace mvc_oa_new.Controllers
         // POST: /Userinfo/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Department department)
         {
             try
             {
-                var userInfo = new UserInfo
-                {
-                    UserName = collection["UserName"],
-                    DelFlag = 0,
-                    SubBy = 0,
-                    SubTime = DateTime.Now,
-                    Pwd = collection["Pwd"],
-                    Mail = collection["Mail"]
-                    ,
-                    Phone = collection["Phone"]
-                };
-                if (_userinfoDal.Add(userInfo) != null)
+
+                department.DelFlag = 0;
+                department.IsLeaf = true;
+                department.Level = 0;
+                department.ParentId = 0;
+                department.SubBy = 0;
+                department.SubTime = DateTime.Now;
+                department.TreePath = string.Empty;
+
+          
+                if (departmentDal.Add(department) != null)
                 {
                     return Content("OK");
                 }
@@ -75,7 +74,7 @@ namespace mvc_oa_new.Controllers
                 //
                 foreach (var id in ids.Split(','))
                 {
-                    _userinfoDal.Deletes(int.Parse(id));
+                    departmentDal.Deletes(int.Parse(id));
                 }
                 return Content("OK");
             }
@@ -90,26 +89,27 @@ namespace mvc_oa_new.Controllers
             return View();
         }
 
-        public ActionResult inittable(string SName, string SMail)
+        public ActionResult inittable()
         {
             var pagesize = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             var pageindex = Request["page"] == null ? 1 : int.Parse(Request["page"]);
             var total = 0;
-            var pagedate = _userinfoDal.Pages(pagesize, pageindex, out total, u => u.DelFlag != 1, u => u.ID);
-            pagedate = _userinfoDal.SearchQuery(pagedate, SName, SMail);
+            var pagedate = departmentDal.Pages(pagesize, pageindex, out total, u => u.DelFlag != 1, u => u.ID);
+           
 
             var date = new
             {
                 total,
-                rows = (from u in pagedate
-                    select new
-                    {
-                        u.ID,
-                        u.UserName,
-                        u.Pwd,
-                        u.Mail,
-                        u.Phone
-                    }
+                rows = (from d in pagedate
+                        select new
+                        {
+                            d.ID,
+                            d.DepName,
+                            d.DelFlag,
+                            d.DepMasterId,
+                            d.DepNo, ToShortDateString = d.SubTime.ToShortDateString(),
+                            d.SubBy
+                        }
                     ).ToList()
             };
             return Json(date, JsonRequestBehavior.AllowGet);
@@ -117,25 +117,39 @@ namespace mvc_oa_new.Controllers
 
         public ActionResult Updata(int id)
         {
-            var s = _userinfoDal.Select(p => p.ID == id).FirstOrDefault();
+            var s = departmentDal.Select(p => p.ID == id).FirstOrDefault();
 
 
             return View(s);
         }
 
         [HttpPost]
-        public ActionResult Updata(UserInfo userInfo)
+        public ActionResult Updata(Department department)
         {
-            if (userInfo == null)
+            if (department == null)
             {
                 return Content("Fuck");
             }
             //  OAModelFactory.GetOaModels().Entry(userInfo).CurrentValues.SetValues(ui);
-            if (_userinfoDal.Update(userInfo))
+            if (departmentDal.Update(department))
             {
                 return Content("ok");
             }
             return Content("Fuck");
         }
+
+        
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+    //            departmentDal.GetOaModels().Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
-}
+ 
+        
+       
+    }
+
