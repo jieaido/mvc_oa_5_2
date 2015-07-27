@@ -170,6 +170,7 @@
     <Compile Include="Controllers\Base.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserinfoController.cs" />
     <Compile Include="Controllers\UserInfoesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,11 +238,14 @@
     <Content Include="Views\UserInfoes\Edit.cshtml" />
     <Content Include="Views\UserInfoes\Index.cshtml" />
     <Content Include="Views\Userinfo\Create.cshtml" />
-    <Content Include="Views\Userinfo\Index.cshtml" />
     <Content Include="Views\Userinfo\ShowUser.cshtml" />
     <Content Include="Views\Userinfo\Updata.cshtml" />
     <Content Include="Views\Department\Index.cshtml" />
     <Content Include="Views\Department\Updata.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Updata.cshtml" />
+    <Content Include="Views\Userinfo\SetRole.cshtml" />
+    <Content Include="Views\Userinfo\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

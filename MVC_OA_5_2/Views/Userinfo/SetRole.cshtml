@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MVCOA_5.Model.Role>
+
+@{
+    ViewBag.Title = "SetRole";
+}
+
+<h2>SetRole</h2>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h2>设置角色</h2>
+    @using (Html.BeginForm())
+    {
+
+        foreach (var role in Model)
+        {
+            <p>
+                @Html.Label(role.RoleName);
+                <input type="checkbox" name="@role.ID  " value="@role.ID " />
+            </p>
+        }
+
+        <input type="submit" name="" value="设置"/>
+    }
+
+
+
+</body>
+</html>

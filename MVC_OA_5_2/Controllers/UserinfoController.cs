@@ -137,5 +137,27 @@ namespace mvc_oa_new.Controllers
             }
             return Content("Fuck");
         }
+
+        public ActionResult SetRole(int id)
+        {
+            //todo 增加id,把要修改的用户拿出来
+           var models= _userinfoDal.GetOaModels().Role.Where(p => p.ID > 0).AsQueryable();
+            return View(models);
+        }
+
+        public ActionResult list()
+        {
+            return null;
+        }
+        [HttpPost]
+        public ActionResult SetRole(FormCollection formCollection)
+        {
+
+           //todo 根据拿出来的用户设置权限 
+
+           
+            var models = formCollection;
+            return View(models);
+        }
     }
 }
